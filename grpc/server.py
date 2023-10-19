@@ -12,7 +12,7 @@ def serve():
     print('Starting serve')
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     pb2_grpc.add_APIServicer_to_server(APIService(), server)
-    server.add_insecure_port('[::]:443')
+    server.add_insecure_port('[::]:50051', options=(('grpc.enable_http_proxy', 0),))
     print('About to serve port')
     server.start()
     server.wait_for_termination()
