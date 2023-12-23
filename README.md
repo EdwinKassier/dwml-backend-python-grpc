@@ -2,7 +2,7 @@
 
 Project Delos answers the question: If I had bought a crypto currency when it first appeared on the public exchange, would I have enough money to buy a lambo if I sold my coins in the last month?
 
-This is the Flask backend version for the system
+This is the python grpc arm of that system
 
 ## Requirements
 * Python3
@@ -28,14 +28,11 @@ You will need two terminals pointed to the frontend and backend directories to s
 
 
 ## Understanding the API
-The structure of the api (including parameters required, expected responses etc.) has been set out in the openapi.yaml file, this adheres to the OpenAPI 3.0 structure, and is consistent with tools like Swagger.
-
-For further learnings you can look at the Flask_Tutorial.md file
+As this is a grpc api, it centers around the usage of protobuf files; in our .proto file we are defining the expected behavior of this api including its endpoints and arguments. After generating the resulting protobuf files using the above command the system is ready to be used. These generated protobuf files are then accessed like an external library, allowing us to easily access the underlying http2 layer and respond and make requests.
 
 ## Test the application
-All the tests for this api are functional tests using pytest
 
-1. To run the test suite, use the following command:  ```[python -m pytest]```
+Tests are incoming for this repo, as grpc requires two parralel containers pointing to each other to function there is additional nuance that is being unravelled.
 
 
 ## The Build Pipeline
@@ -49,9 +46,6 @@ This pipeline can be found in the github workflows folder in the push.yml file
 
 ![Alt text](BuildPipeline.png?raw=true "Title")
 
-## Generating proto files
-
-python -m grpc_tools.protoc --proto_path=. ./protobuf/api.proto --python_out=. --grpc_python_out=.
 
 ## Bringing the code to production
 This code encompasses the backend for a larger system, in the diagram below I have set out the architecture that could be used to create an enterprise ready system that meets all the needs of a high availability and low latency web app.
